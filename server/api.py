@@ -3,7 +3,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from ml.generate import get_chapter, get_acrostic, get_horizontal_acrostic
-from ml.model_manager import ModelManager
+from model_manager import ModelManager
 
 # FastAPI app
 app = FastAPI()

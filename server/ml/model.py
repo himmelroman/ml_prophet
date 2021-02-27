@@ -1,6 +1,7 @@
 import torch
 from torch import nn
 
+
 # Declaring the model
 class CharRNN(nn.Module):
 

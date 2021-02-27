@@ -2,7 +2,7 @@ import json
 import torch
 from pathlib import Path
 
-from model import CharRNN
+from ml.model import CharRNN
 
 
 class ModelManager:
