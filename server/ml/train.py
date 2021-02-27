@@ -1,8 +1,8 @@
 import argparse
-
-import torch
 import numpy as np
 from pathlib import Path
+
+import torch
 from torch import nn
 
 from model import CharRNN
