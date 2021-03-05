@@ -26,7 +26,7 @@ const RootContainer = props => {
 
         console.log('fetching models')
 
-        axios.get('http://localhost:8080/models').then(res => {
+        axios.get('http://auto-prophet.ml:8080/models').then(res => {
             console.log(res.data)
 
             // set model list and default
@@ -39,7 +39,7 @@ const RootContainer = props => {
 
         console.log('fetching models')
 
-        axios.get('http://localhost:8080/forms').then(res => {
+        axios.get('http://auto-prophet.ml:8080/forms').then(res => {
             console.log(res.data)
 
             // set form list and default
@@ -50,7 +50,7 @@ const RootContainer = props => {
 
     const sendRequest = () => {
 
-        const url = 'http://localhost:8080/generate/' + model + '/' + form
+        const url = 'http://auto-prophet.ml:8080/generate/' + model + '/' + form
         console.log('fetching text form ' + url)
 
         axios.get(url).then(res => {

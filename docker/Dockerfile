@@ -21,6 +21,7 @@ COPY server/ /app/
 WORKDIR /app
 ENV PYTHONPATH /app
 ENV MODEL_CONFIG_PATH /app/models/models.json
+EXPOSE 8080
 
 COPY docker/start.sh /
 CMD ["/start.sh"]

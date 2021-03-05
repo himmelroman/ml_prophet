@@ -10,7 +10,7 @@ app = FastAPI()
 app.add_middleware(CORSMiddleware,
                    allow_origins=[
                        '*',
-                       'http://localhost:8080',
+                       'http://0.0.0.0:8080',
                        'http://localhost:3000'
                    ])
 
@@ -25,7 +25,7 @@ def list_models():
 
 
 @app.get("/forms")
-def list_models():
+def list_forms():
     return [
         {
             'id': 'chapter',

@@ -1,4 +1,4 @@
 #! /usr/bin/env sh
 set -e
 
-uvicorn api:app --port 8080
+uvicorn api:app --host 0.0.0.0 --port 8080
