@@ -3,16 +3,12 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from ml.generate import get_chapter, get_acrostic, get_horizontal_acrostic
+from schemas import GenerateReq
 from model_manager import ModelManager
 
 # FastAPI app
 app = FastAPI()
-app.add_middleware(CORSMiddleware,
-                   allow_origins=[
-                       '*',
-                       'http://0.0.0.0:8080',
-                       'http://localhost:3000'
-                   ])
+app.add_middleware(CORSMiddleware, allow_methods=["*"], allow_headers=["*"], allow_origins=['*'])
 
 # model manager
 mm = ModelManager()
@@ -41,31 +37,31 @@ def list_forms():
         }]
 
 
-@app.get("/generate/{model}/{form}")
-def generate(model: str, form: str):
+@app.post("/generate")
+def generate(req: GenerateReq):
 
-    print(f'Generate: {model}/{form}')
+    print(f'Generate: {req.model}/{req.form}/{req.prime}')
 
     # get model
-    mdl = mm.get_model(model)
+    mdl = mm.get_model(req.model)
 
     # check form
-    if form == 'chapter':
+    if req.form == 'chapter':
 
         # gen chapter
-        out = get_chapter(mdl, 'א', 20)
+        out = get_chapter(mdl, req.prime, 20)
 
-    elif form == 'acrostic':
+    elif req.form == 'acrostic':
 
         # gen acrostic
-        out = get_acrostic(mdl, 'א')
+        out = get_acrostic(mdl, req.prime)
 
-    elif form == 'horizontal_acrostic':
+    elif req.form == 'horizontal_acrostic':
 
         # gen horizontal acrostic
-        out = get_horizontal_acrostic(mdl, 'א')
+        out = get_horizontal_acrostic(mdl, req.prime)
 
     return {
-        "form": form,
+        "form": req.form,
         "verses": [dict(text=verse) for verse in out.split('\n')]
     }
