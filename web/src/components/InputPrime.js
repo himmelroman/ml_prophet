@@ -3,17 +3,14 @@ import React, {useEffect, useState} from "react"
 const InputPrime = props => {
 
     const onPrimeChange = e => {
-        console.log(e)
         props.setPrime(e.target.value)
     }
 
     const onModelChange = e => {
-        console.log(e)
         props.setModel(e.target.value)
     }
 
     const onFormChange = e => {
-        console.log(e)
         props.setForm(e.target.value)
     }
 
@@ -27,13 +24,17 @@ const InputPrime = props => {
         e.preventDefault();
 
         // verify value
-        if (props.prime.trim()) {
+        if (props.prime && props.prime.trim()) {
 
             // fire handler to add verse
             props.sendRequest(props.model, props.form, props.prime);
 
             // clean textbox
             props.setPrime('')
+        }
+        else {
+            alert('חייבים לתת לנביא אוכל נפש!\n' +
+                'אפשר לכתוב ״א״ אם אין רעיון')
         }
     };
 

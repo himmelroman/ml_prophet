@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react"
 
+import { getAPIEndpoint } from "../utils/env"
+
 import Header from "./Header"
 import VerseList from "./VerseList";
 import InputPrime from "./InputPrime";
@@ -23,8 +25,9 @@ const RootContainer = props => {
     useEffect(() => { loadForms() }, [])
 
     function loadModels() {
-        axios.get('http://api.auto-prophet.ml:8080/models').then(res => {
-            console.log(res.data)
+        axios.get(
+            getAPIEndpoint() + "/models"
+        ).then(res => {
 
             // set model list and default
             setModels(res.data);
@@ -33,8 +36,9 @@ const RootContainer = props => {
     }
 
     function loadForms() {
-        axios.get('http://api.auto-prophet.ml:8080/forms').then(res => {
-            console.log(res.data)
+        axios.get(
+            getAPIEndpoint() + "/forms"
+        ).then(res => {
 
             // set form list and default
             setForms(res.data);
@@ -43,12 +47,16 @@ const RootContainer = props => {
     }
 
     const sendRequest = () => {
-        axios.post('http://api.auto-prophet.ml:8080/generate', {
-            model: model,
-            form: form,
-            prime: prime
-        }).then(res => {
-            console.log(res.data['verses'])
+        axios.post(
+            getAPIEndpoint() + "/generate",
+            {
+                model: model,
+                form: form,
+                prime: prime
+            }
+        ).then(res => {
+
+            // set verses
             setVerses(res.data['verses']);
         });
     };
