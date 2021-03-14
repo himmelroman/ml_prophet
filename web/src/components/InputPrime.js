@@ -40,27 +40,41 @@ const InputPrime = props => {
 
     return (
         <div className="menuContainer">
-            <div>
-                <select className="modelSelect" onChange={onModelChange}>
-                    {
-                        props.models.map(m => (<option value={m.id}>{m.name}</option>))
-                    }
-                </select>
-                <select className="modelSelect" style={{"margin-right": "15px"}} onChange={onFormChange}>
-                    {
-                        props.forms.map(m => (<option value={m.id}>{m.name}</option>))
-                    }
-                </select>
+            <div className="optionContainer">
+                <div className="inputTitle">נוסח:</div>
+                <div className="inputContainer">
+                    <select className="minorSelect" onChange={onModelChange}>
+                        {
+                            props.models.map(m => (<option value={m.id}>{m.name}</option>))
+                        }
+                    </select>
+                </div>
             </div>
-            <form onSubmit={handleSubmit} className="formContainer">
-                <input type="text"
-                       className="input-text"
-                       placeholder="ממה להתחיל?"
-                       value={props.prime}
-                       onChange={onPrimeChange}
-                       onKeyDown={handleKey} />
-                <button className="input-submit">התנבא</button>
-            </form>
+            <div className="optionContainer">
+                <div className="inputTitle">צורה:</div>
+                <div className="inputContainer">
+                    <select className="minorSelect" onChange={onFormChange}>
+                        {
+                            props.forms.map(m => (<option value={m.id}>{m.name}</option>))
+                        }
+                    </select>
+                </div>
+            </div>
+            <div className="mainInputContainer">
+                <form className="mainInputForm" onSubmit={handleSubmit}>
+                    <div className="inputContainer">
+                        <input type="text"
+                               className="input-text"
+                               placeholder="ממה להתחיל?"
+                               value={props.prime}
+                               onChange={onPrimeChange}
+                               onKeyDown={handleKey} />
+                    </div>
+                    <div className="buttonContainer">
+                        <button className="input-submit">התנבא</button>
+                    </div>
+                </form>
+            </div>
         </div>
     )
 }
